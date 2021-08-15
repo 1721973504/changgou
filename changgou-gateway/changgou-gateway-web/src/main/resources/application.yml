@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: gateway-web
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              -GET
+              -POST
+              -PUT
+              -DELETE
+      routes:
+        - id: changgou_goods_route
+          uri: http://localhost:18081
+          predicates:
+            - Path=/brand/**
+server:
+  port: 8001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: true
